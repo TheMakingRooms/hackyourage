@@ -2,6 +2,7 @@ import pyaudio
 import RPi.GPIO as GPIO
 import time
 import wave
+import os
 
 buttons = [24,23,18]
 recordButon = 25
@@ -60,3 +61,7 @@ while True:
                 # close the file
                 wf.close()
                 time.sleep(0.1)
+
+    for b in buttons:
+        if GPIO.input(b):
+            os.system('aplay ' + str(b) + '.wav')
