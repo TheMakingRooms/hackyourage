@@ -44,7 +44,7 @@ while True:
 	while lcd.select_button:
 		pass
 	lcd.clear()
-	lcd.message= "Scanning...\Enter when done"
+	lcd.message= "Scanning...\nEnter when done"
 	lcd.color = [100, 0, 0]
 	time.sleep(1)
 
@@ -55,7 +55,7 @@ while True:
 		pass
 
 	lcd.clear()
-	lcd.message= "Scan successful\Enter 4 options"
+	lcd.message= "Scan successful\nEnter 4 options"
 	lcd.color = [0, 0, 100]
 
 	while not lcd.select_button:
@@ -71,21 +71,21 @@ while True:
 
 	while not lcd.select_button:
 		if lcd.up_button:
-			i = i+1% len(options)
+			i = i+1% len(options)-1
 			j=0
 			refresh(i,j)
 
 		elif lcd.down_button:
-			i = i-1% len(options)
+			i = i-1% len(options)-1
 			j=0
 			refresh(i,j)
 
 		elif lcd.left_button:
-			j = j-1% len(options[i])	
+			j = j-1% len(options[i])-1	
 			refresh(i,j)		
 
 		elif lcd.right_button:
-			j = j+1% len(options[i])
+			j = j+1% len(options[i])-1
 			refresh(i,j)
 
 	time.sleep(0.5)		
