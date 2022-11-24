@@ -21,10 +21,6 @@ lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
 
 lcd.clear()
 # Set LCD color to red
-lcd.color = [100, 0, 0]
-time.sleep(1)
-# Print two line message
-lcd.message = "Hello\nCircuitPython"
 
 lcd.cursor = True
 
@@ -43,7 +39,7 @@ lcd.blink = True
 
 
 while True:
-	lcd.message= "Custom Clothing\nPress Select to scan"
+	lcd.message= "Custom Clothing\nEnter to scan"
 	lcd.color = [0, 0, 100]
 
 	while not lcd.select_button:
@@ -51,6 +47,7 @@ while True:
 	time.sleep(0.5)
 	while lcd.select_button:
 		pass
+	lcd.clear()
 	lcd.message= "Scanning…\n Press Select to stop scanning"
 	lcd.color = [100, 0, 0]
 	time.sleep(1)
@@ -60,7 +57,8 @@ while True:
 	time.sleep(0.5)		
 	while lcd.select_button:
 		pass
-
+		
+	lcd.clear()
 	lcd.message= "Scan successful\nLCD Press button for options"
 	lcd.color = [0, 0, 100]
 
