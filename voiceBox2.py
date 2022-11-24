@@ -27,7 +27,6 @@ stream = record.open(format=Format,
                                input=True,
                                output=True,
                                frames_per_buffer=chunk)
-stream.start_stream()
 
 
 
@@ -39,21 +38,23 @@ while True:
 
     while GPIO.input(recordButon):
         for b in buttons:
-            while GPIO.input(b):
-                for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
-                    data = stream.read(chunk)
-                    frames.append(data)
-            stream.stop_stream()  # stops the stream (recording)
-            stream.close()
-            record.terminate()
-            wf = wave.open(str(b)+".wav", "wb")
-            # set the channels
-            wf.setnchannels(2)
-            # set the sample format
-            wf.setsampwidth(record.get_sample_size(pyaudio.paInt16))
-            # set the sample rate
-            wf.setframerate(sample_rate)
-            # write the frames as bytes
-            wf.writeframes(b"".join(frames))
-            # close the file
-            wf.close()
+            if GPIO.input(b):
+                stream.start_stream()
+                while GPIO.input(b):
+                    for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
+                        data = stream.read(chunk)
+                        frames.append(data)
+                stream.stop_stream()  # stops the stream (recording)
+                stream.close()
+                record.terminate()
+                wf = wave.open(str(b)+".wav", "wb")
+                # set the channels
+                wf.setnchannels(2)
+                # set the sample format
+                wf.setsampwidth(record.get_sample_size(pyaudio.paInt16))
+                # set the sample rate
+                wf.setframerate(sample_rate)
+                # write the frames as bytes
+                wf.writeframes(b"".join(frames))
+                # close the file
+                wf.close()
