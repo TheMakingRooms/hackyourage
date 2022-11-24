@@ -14,7 +14,7 @@ for i in buttons:
 GPIO.setup(recordButon, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 frames = []
-audio_filename = "item_audio.wav"
+#audio_filename = "item_audio.wav"
 chunk = 2048  # data is broken into chunks (buffers) of audio. In this case, each chunk contains 1024 frames (a frame is the total number of samples which occur at the same moment in time. If the audio is mono, then each frame contains 1 sample. If the audio is stereo, then each frame contains 2 samples (one from each channnel)
 channels = 2  # stero format. This means there are 2 samples in each frame.
 # As there are 2 bytes in each sample and 2 samples in each frame, there are 4 bytes in each frame. Therefore, there are 4096 bytes in each chunk (1024 frames*4 bytes).
@@ -30,38 +30,30 @@ stream = record.open(format=Format,
 stream.start_stream()
 
 
+
 while True:
-    if GPIO.input(recordButon):
-        for i in buttons:
-            if GPIO.input(i):
-                print("record on " + str(i))        
-    else:
-        for i in buttons:
-            if GPIO.input(i):
-                print("play " + str(i))
 
+    while not GPIO.input(recordButon):
+        pass
+    time.sleep(0.1)
 
-
-
-while not GPIO.input(recordButon):
-    pass
-time.sleep(0.1)
-
-while GPIO.input(recordButon):
-    for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
-        data = stream.read(chunk)
-        frames.append(data)
-stream.stop_stream()  # stops the stream (recording)
-stream.close()
-record.terminate()
-wf = wave.open(audio_filename, "wb")
-# set the channels
-wf.setnchannels(2)
-# set the sample format
-wf.setsampwidth(record.get_sample_size(pyaudio.paInt16))
-# set the sample rate
-wf.setframerate(sample_rate)
-# write the frames as bytes
-wf.writeframes(b"".join(frames))
-# close the file
-wf.close()
+    while GPIO.input(recordButon):
+        for b in buttons:
+            while GPIO.input(b):
+                for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
+                    data = stream.read(chunk)
+                     frames.append(data)
+            stream.stop_stream()  # stops the stream (recording)
+            stream.close()
+            record.terminate()
+            wf = wave.open(str(b)+".wav", "wb")
+            # set the channels
+            wf.setnchannels(2)
+            # set the sample format
+            wf.setsampwidth(record.get_sample_size(pyaudio.paInt16))
+            # set the sample rate
+            wf.setframerate(sample_rate)
+            # write the frames as bytes
+            wf.writeframes(b"".join(frames))
+            # close the file
+            wf.close()
