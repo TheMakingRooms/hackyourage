@@ -42,7 +42,7 @@ while True:
             while GPIO.input(b):
                 for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
                     data = stream.read(chunk)
-                     frames.append(data)
+                    frames.append(data)
             stream.stop_stream()  # stops the stream (recording)
             stream.close()
             record.terminate()
