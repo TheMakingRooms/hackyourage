@@ -28,7 +28,7 @@ lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
 
 def refresh(i, j):
 	lcd.clear()
-	lcd.message=  '^v<> Options' +'\n' + option[i][j]
+	lcd.message=  '^v<> Options' +'\n' + options[i][j]
 	time.sleep(0.5)
 
 
@@ -44,7 +44,7 @@ while True:
 	while lcd.select_button:
 		pass
 	lcd.clear()
-	lcd.message= "Scanning...\nSelect when done"
+	lcd.message= "Scanning...\Enter when done"
 	lcd.color = [100, 0, 0]
 	time.sleep(1)
 
@@ -55,7 +55,7 @@ while True:
 		pass
 
 	lcd.clear()
-	lcd.message= "Scan successful\nSelect 4 options"
+	lcd.message= "Scan successful\Enter 4 options"
 	lcd.color = [0, 0, 100]
 
 	while not lcd.select_button:
@@ -64,16 +64,6 @@ while True:
 	while lcd.select_button:
 		pass
 
-
-	lcd.clear()
-	lcd.message= "Scan successful\nSelect 4 options"
-
-
-	while not lcd.select_button:
-		pass
-	time.sleep(0.5)		
-	while lcd.select_button:
-		pass
 
 	i = 0
 	j = 0
@@ -102,8 +92,10 @@ while True:
 	while not lcd.select_button:
 		pass
 	lcd.clear()
-	lcd.message= "Options chosen\nOrder made"
+	lcd.message= "Order made\nEnter to restart"
 
-	
-
-
+	while not lcd.select_button:
+		pass
+	time.sleep(0.5)		
+	while lcd.select_button:
+		pass
