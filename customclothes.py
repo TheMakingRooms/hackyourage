@@ -35,8 +35,8 @@ def refresh(i, j):
 
 while True:
 	lcd.clear()
-	lcd.message= "Custom Clothing\nEnter to scan"
 	lcd.color = [0, 0, 100]
+	lcd.message= "Custom Clothing\nEnter to scan"
 
 	while not lcd.select_button:
 		pass
@@ -44,8 +44,8 @@ while True:
 	while lcd.select_button:
 		pass
 	lcd.clear()
-	lcd.message= "Scanning...\nEnter when done"
 	lcd.color = [100, 0, 0]
+	lcd.message= "Scanning...\nEnter when done"
 	time.sleep(1)
 
 	while not lcd.select_button:
@@ -55,8 +55,8 @@ while True:
 		pass
 
 	lcd.clear()
+	lcd.color = [0, 100, 0]
 	lcd.message= "Scan successful\nEnter 4 options"
-	lcd.color = [0, 0, 100]
 
 	while not lcd.select_button:
 		pass
@@ -92,6 +92,7 @@ while True:
 	while not lcd.select_button:
 		pass
 	lcd.clear()
+	lcd.color = [100, 100, 100]
 	lcd.message= "Order made\nEnter to restart"
 
 	while not lcd.select_button:
