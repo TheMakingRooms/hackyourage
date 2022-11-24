@@ -71,21 +71,21 @@ while True:
 
 	while not lcd.select_button:
 		if lcd.up_button:
-			i = i+1% len(options)-1
+			i = (i+1)% len(options)
 			j=0
 			refresh(i,j)
 
 		elif lcd.down_button:
-			i = i-1% len(options)-1
+			i = (i-1)% len(options)
 			j=0
 			refresh(i,j)
 
 		elif lcd.left_button:
-			j = j-1% len(options[i])-1	
+			j = (j-1)% len(options[i])
 			refresh(i,j)		
 
 		elif lcd.right_button:
-			j = j+1% len(options[i])-1
+			j = (j+1)% len(options[i])
 			refresh(i,j)
 
 	time.sleep(0.5)		
