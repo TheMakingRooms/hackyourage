@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+from recorder import Recorder
 
 buttons = [24,23,18]
 recordButon = 25
