@@ -44,17 +44,25 @@ lcd.blink = True
 
 while True:
 	lcd.message= "Custom Clothing\nPress Select to scan"
+	lcd.color = [0, 0, 100]
 
+	while not lcd.select_button:
+		pass
+	time.sleep(0.5)
+	while lcd.select_button:
+		pass
+	lcd.message= "Scanning…\n Press Select to stop scanning"
+	lcd.color = [100, 0, 0]
+	time.sleep(1)
 
-	if lcd.select_button:
-		lcd.message= "Scanning…\n Press Select to stop scanning"
-		lcd.color = [0, 100, 0]
-		time.sleep(2)
+	while not lcd.select_button:
+		pass
+	time.sleep(0.5)		
+	while lcd.select_button:
+		pass
 
-		if lcd.select_button:
-			lcd.message= "Scan successful\nLCD Press button for options"
-			lcd.color = [0, 0, 100]
-			time.sleep(2)
+	lcd.message= "Scan successful\nLCD Press button for options"
+	lcd.color = [0, 0, 100]
 
 
 
