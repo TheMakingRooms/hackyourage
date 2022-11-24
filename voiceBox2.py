@@ -39,6 +39,7 @@ while True:
     while GPIO.input(recordButon):
         for b in buttons:
             if GPIO.input(b):
+                time.sleep(0.1)
                 stream.start_stream()
                 while GPIO.input(b):
                     for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
@@ -58,3 +59,4 @@ while True:
                 wf.writeframes(b"".join(frames))
                 # close the file
                 wf.close()
+                time.sleep(0.1)
