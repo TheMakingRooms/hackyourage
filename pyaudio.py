@@ -9,11 +9,11 @@ GPIO.setup(recordButon, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 frames = []
 audio_filename = "item_audio.wav"
 chunk = 2048  # data is broken into chunks (buffers) of audio. In this case, each chunk contains 1024 frames (a frame is the total number of samples which occur at the same moment in time. If the audio is mono, then each frame contains 1 sample. If the audio is stereo, then each frame contains 2 samples (one from each channnel)
-Format = pyaudio.paInt16  # 'paInt16' is the sampling format. In this case, each sample contains 16 bits (2 bytes).
 channels = 2  # stero format. This means there are 2 samples in each frame.
 # As there are 2 bytes in each sample and 2 samples in each frame, there are 4 bytes in each frame. Therefore, there are 4096 bytes in each chunk (1024 frames*4 bytes).
 sample_rate = 44100  # Sampling rate (number of frames per second). In this case, 44100 frames per second
 record = pyaudio.PyAudio()  # initialise PyAudio object
+Format = pyaudio.paInt16  # 'paInt16' is the sampling format. In this case, each sample contains 16 bits (2 bytes).
 stream = record.open(format=Format,
                                channels=channels,
                                rate=sample_rate,
