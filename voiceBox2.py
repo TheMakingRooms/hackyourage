@@ -33,11 +33,9 @@ stream = record.open(format=Format,
 
 while True:
 
-    while not GPIO.input(recordButon):
-        pass
-    time.sleep(0.1)
 
     while GPIO.input(recordButon):
+        time.sleep(0.1)
         for b in buttons:
             if GPIO.input(b):
                 time.sleep(0.1)
