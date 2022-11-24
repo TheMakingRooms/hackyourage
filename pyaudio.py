@@ -2,6 +2,7 @@ import pyaudio
 import RPi.GPIO as GPIO
 recordButon = 25
 import time
+import wave
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(recordButon, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
