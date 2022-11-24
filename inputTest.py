@@ -15,8 +15,8 @@ while True:
 	if GPIO.input(recordButon):
 		for i in buttons:
 			if GPIO.input(i):
-				print("record on " + i)		
+				print("record on " + str(i))		
 	else:
 		for i in buttons:
 			if GPIO.input(i):
-				print("play " + i)
+				print("play " + str(i))
