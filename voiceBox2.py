@@ -20,14 +20,7 @@ chunk = 2048  # data is broken into chunks (buffers) of audio. In this case, eac
 channels = 2  # stero format. This means there are 2 samples in each frame.
 # As there are 2 bytes in each sample and 2 samples in each frame, there are 4 bytes in each frame. Therefore, there are 4096 bytes in each chunk (1024 frames*4 bytes).
 sample_rate = 44100  # Sampling rate (number of frames per second). In this case, 44100 frames per second
-record = pyaudio.PyAudio()  # initialise PyAudio object
-Format = pyaudio.paInt16  # 'paInt16' is the sampling format. In this case, each sample contains 16 bits (2 bytes).
-stream = record.open(format=Format,
-                               channels=channels,
-                               rate=sample_rate,
-                               input=True,
-                               output=True,
-                               frames_per_buffer=chunk)
+
 
 
 
@@ -38,7 +31,14 @@ while True:
         time.sleep(0.1)
         for b in buttons:
             if GPIO.input(b):
-                time.sleep(0.1)
+                record = pyaudio.PyAudio()  # initialise PyAudio object
+                Format = pyaudio.paInt16  # 'paInt16' is the sampling format. In this case, each sample contains 16 bits (2 bytes).
+                stream = record.open(format=Format,
+                               channels=channels,
+                               rate=sample_rate,
+                               input=True,
+                               output=True,
+                               frames_per_buffer=chunk)
                 stream.start_stream()
                 while GPIO.input(b):
                     for i in range(0, int((sample_rate) / chunk)):  # (sample_rate * record_seconds) is the total number of frames recorded. As the for loop iterates through each chunk of frames and appends each chunk to the list 'frames', the total number of frames must be divided by the chunk size 'chunk'.
