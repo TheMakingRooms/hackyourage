@@ -8,10 +8,11 @@ screen = pygame.display.set_mode((0,0))
 
 # Init camera
 camera = picamera.PiCamera()
-camera.resolution = (1280/2, 720/2)
+camera.resolution = (640, 360)
 camera.crop = (0.0, 0.0, 1.0, 1.0)
 
 BLACK = (0, 0, 0)
+GREY = (100,100,100)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
@@ -49,7 +50,7 @@ while(exitFlag):
           (camera.resolution[0] * camera.resolution[1] * 3)],
            camera.resolution, 'RGB')
 
-    screen.fill(WHITE)
+    screen.fill(GREY)
     if img:
         screen.blit(img, (x,y))
 
