@@ -11,6 +11,15 @@ camera = picamera.PiCamera()
 camera.resolution = (1280, 720)
 camera.crop = (0.0, 0.0, 1.0, 1.0)
 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+ORANGE = (255, 150, 0)
+
+BAR_WIDTH = 20
+BAR_HEIGHT = 10
+
 x = (screen.get_width() - camera.resolution[0]) / 2
 y = (screen.get_height() - camera.resolution[1]) / 2
 
@@ -31,13 +40,15 @@ while(exitFlag):
     stream.readinto(rgb)
     stream.close()
     img = pygame.image.frombuffer(rgb[0:
-          (camera.resolution[0] * camera.resolution[1] * 3)],
+          (camera.resolution[0] * camera.resolution[1] * 2)],
            camera.resolution, 'RGB')
 
-    screen.fill(0)
+    screen.fill(WHITE)
     if img:
         screen.blit(img, (x,y))
-
+    pygame.draw.rect(screen, RED, pygame.Rect(30, 30, BAR_WIDTH, BAR_HEIGHT))
+    pygame.draw.rect(screen, ORANGE, pygame.Rect(30, 30 + (BAR_HEIGHT*1.5), BAR_WIDTH, BAR_HEIGHT))
+   
     pygame.display.update()
 
 camera.close()
