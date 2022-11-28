@@ -40,7 +40,7 @@ while(exitFlag):
     stream.readinto(rgb)
     stream.close()
     img = pygame.image.frombuffer(rgb[0:
-          (camera.resolution[0] * camera.resolution[1] * 2)],
+          (camera.resolution[0] * camera.resolution[1] * 3)],
            camera.resolution, 'RGB')
 
     screen.fill(WHITE)
