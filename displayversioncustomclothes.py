@@ -21,10 +21,12 @@ YELLOW = (255,255,0)
 
 BAR_COLOURS = [GREEN,YELLOW,ORANGE,RED]
 
-BAR_WIDTH = 10
+BAR_WIDTH = 50
 BAR_HEIGHT = 30
 
-specs = [2,1,1,4,3]
+specs = [[2,1,1,4,3],
+        [1,3,4,4,2],
+        [1,3,4,4,2]]
 
 
 x = (screen.get_width() - camera.resolution[0]) / 4
@@ -54,9 +56,9 @@ while(exitFlag):
     if img:
         screen.blit(img, (x,y))
 
-    for index, item in enumerate(specs):
+    for index, item in enumerate(specs[0]):
         for i in range(item):
-            pygame.draw.rect(screen, BAR_COLOURS[item-1], pygame.Rect(1000 + (i*BAR_WIDTH*1.3), 500+(BAR_HEIGHT*1.3*index), BAR_WIDTH, BAR_HEIGHT))
+            pygame.draw.rect(screen, BAR_COLOURS[item-1], pygame.Rect(1200 + (i*BAR_WIDTH*1.3), 500+(BAR_HEIGHT*1.3*index), BAR_WIDTH, BAR_HEIGHT))
    
     pygame.display.update()
 
