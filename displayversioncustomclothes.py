@@ -56,7 +56,7 @@ while(exitFlag):
 
     for index, item in enumerate(specs):
         for i in range(item):
-            pygame.draw.rect(screen, BAR_COLOURS[item], pygame.Rect(40*index, 30 + (i*BAR_HEIGHT*1.2), BAR_WIDTH, BAR_HEIGHT))
+            pygame.draw.rect(screen, BAR_COLOURS[item], pygame.Rect(1000+(40*index), 1000 - (i*BAR_HEIGHT*1.3), BAR_WIDTH, BAR_HEIGHT))
    
     pygame.display.update()
 
