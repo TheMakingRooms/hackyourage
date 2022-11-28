@@ -5,6 +5,8 @@ import io
 # Init pygame 
 pygame.init()
 screen = pygame.display.set_mode((0,0))
+pygame.font.init()
+my_font = pygame.font.SysFont('Arial', 30)
 
 # Init camera
 camera = picamera.PiCamera()
@@ -59,7 +61,15 @@ while(exitFlag):
     for index, item in enumerate(specs[0]):
         for i in range(item):
             pygame.draw.rect(screen, BAR_COLOURS[item-1], pygame.Rect(1200 + (i*BAR_WIDTH*1.3), 500+(BAR_HEIGHT*1.3*index), BAR_WIDTH, BAR_HEIGHT))
-   
+    price = my_font.render('Price:', False, (0, 0, 0))
+    quality = my_font.render('Quality:', False, (0, 0, 0))
+    ethical = my_font.render('Ethical:', False, (0, 0, 0))
+    sustainability =  my_font.render('Sustainability:', False, (0, 0, 0))
+    screen.blit(price, (1000,500))
+    screen.blit(quality, (1000,550))
+    screen.blit(ethical, (1000,600))
+    screen.blit(sustainability, (1000,650))
+
     pygame.display.update()
 
 camera.close()
