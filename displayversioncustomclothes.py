@@ -8,9 +8,11 @@ screen = pygame.display.set_mode((0,0))
 pygame.font.init()
 my_font = pygame.font.SysFont('Arial', 30)
 
+scale_ratio =  screen.get_width() /1920
+
 # Init camera
 camera = picamera.PiCamera()
-camera.resolution = (640, 360)
+camera.resolution = (int(640*scale_ratio), int(360*scale_ratio))
 camera.crop = (0.0, 0.0, 1.0, 1.0)
 
 BLACK = (0, 0, 0)
@@ -23,8 +25,8 @@ YELLOW = (255,255,0)
 
 BAR_COLOURS = [GREEN,YELLOW,ORANGE,RED]
 
-BAR_WIDTH = 50
-BAR_HEIGHT = 30
+BAR_WIDTH = int(50* scale_ratio)
+BAR_HEIGHT = int(30* scale_ratio)
 
 specs = [[2,1,1,4,3],
         [1,3,4,4,2],
@@ -65,10 +67,14 @@ while(exitFlag):
     quality = my_font.render('Quality:', False, (0, 0, 0))
     ethical = my_font.render('Ethical:', False, (0, 0, 0))
     sustainability =  my_font.render('Sustainability:', False, (0, 0, 0))
-    screen.blit(price, (1000,500))
-    screen.blit(quality, (1000,550))
-    screen.blit(ethical, (1000,600))
-    screen.blit(sustainability, (1000,650))
+    statsX = int(1000*scale_ratio)
+    statsY = int(500*scale_ratio)
+    statsYChange = int(50*scale_ratio)
+
+    screen.blit(price, (statsX,statsY))
+    screen.blit(quality, (statsX,statsY+ statsYChange))
+    screen.blit(ethical, (statsX,statsY+(statsYChange*2)))
+    screen.blit(sustainability, (statsX,statsY+(statsYChange*2)))
 
     pygame.display.update()
 
