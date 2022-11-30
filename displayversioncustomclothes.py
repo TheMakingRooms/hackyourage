@@ -6,13 +6,14 @@ import io
 pygame.init()
 screen = pygame.display.set_mode((0,0))
 pygame.font.init()
-my_font = pygame.font.SysFont('Arial', 30)
-
 scale_ratio =  screen.get_width() /1920
+
+my_font = pygame.font.SysFont('Arial', int(30*scale_ratio))
+
 
 # Init camera
 camera = picamera.PiCamera()
-camera.resolution = (int(640*scale_ratio), int(360*scale_ratio))
+camera.resolution = (scale_ratio), 360)
 camera.crop = (0.0, 0.0, 1.0, 1.0)
 
 BLACK = (0, 0, 0)
@@ -62,7 +63,7 @@ while(exitFlag):
 
     for index, item in enumerate(specs[0]):
         for i in range(item):
-            pygame.draw.rect(screen, BAR_COLOURS[item-1], pygame.Rect(1200 + (i*BAR_WIDTH*1.3), 500+(BAR_HEIGHT*1.3*index), BAR_WIDTH, BAR_HEIGHT))
+            pygame.draw.rect(screen, BAR_COLOURS[item-1], pygame.Rect(1200 *scale_ratio + (i*BAR_WIDTH*1.3), 500 * scale_ratio+(BAR_HEIGHT*1.3*index), BAR_WIDTH, BAR_HEIGHT))
     price = my_font.render('Price:', False, (0, 0, 0))
     quality = my_font.render('Quality:', False, (0, 0, 0))
     ethical = my_font.render('Ethical:', False, (0, 0, 0))
